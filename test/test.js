@@ -27,11 +27,6 @@ describe("OctopusContractExample", function () {
   });
 
   it("should decrypt the message after the target block number", async function () {
-    // Advance to the target block number
-    //THIS IS NOT REALLY MINING, THAT'S THE ISSUE
-    //CHECK THE CONTRACT OctopusContractExample and u'll see how i debuged this
-    //with the console log it was super useful to see what's the current block.number and it was returning a #4
-    //but supposedly it should be "270604191200", so the provider.send is not really mining blocks.
     await ethers.provider.send("evm_mine", [270604191200]);
 
     // Call the decrypt function
