@@ -1,5 +1,7 @@
 pragma solidity ^0.8.9;
 import "./OctopusCenter.sol";
+import "hardhat/console.sol";
+
 
 //Timelock encryption
 contract OctopusContractExample {
@@ -16,7 +18,8 @@ contract OctopusContractExample {
     }
     
     function decrypt() public{
-        require(block.number>targetBlockNum);
+        console.log("Current block number:", block.number,"target:", targetBlockNum);
+        require(block.number > targetBlockNum, "Can't decrypt");
         octopusCenter.emitMessage(signatureTargetMessage);
     }
 }
