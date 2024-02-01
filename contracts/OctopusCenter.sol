@@ -21,7 +21,7 @@ contract OctopusCenter {
     }
 
     function emitMessage(bytes32 signingTarget) public returns(bool){
-        require(OctopusDictionary[signingTarget]==msg.sender);
+        require(OctopusDictionary[signingTarget]==msg.sender,"invalid msg.sender");
         emit MessageEmit(signingTarget);
         return true;
 

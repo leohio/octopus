@@ -2,7 +2,7 @@ const { expect } = require("chai");
 const { ethers } = require("hardhat");
 const { utils } = require("web3");
 
-describe("OctopusContractExample", function () {
+describe("TimeLockEncryption", function () {
   let octopusExample;
   let octopusCenter;
 
@@ -15,26 +15,27 @@ describe("OctopusContractExample", function () {
 
     const random32bytes2 = utils.randomHex(32);
 
-    const OctopusContractExample = await ethers.getContractFactory(
-      "OctopusContractExample"
+    const TimeLockEncryption = await ethers.getContractFactory(
+      "TimeLockEncryption"
     );
-    octopusExample = await OctopusContractExample.deploy(
+    timeLock = await TimeLockEncryption.deploy(
       random32bytes2,
       octopusCenter.target,
       3 // set target block number to some value
     );
-    await octopusExample.waitForDeployment();
+    await timeLock.waitForDeployment();
   });
 
   it("should decrypt the message after the target block number", async function () {
     await ethers.provider.send("evm_mine", [270604191200]);
 
     // Call the decrypt function
-    await octopusExample.decrypt();
+    await timeLock.decrypt();
 
     // Check if the MessageEmit event was emitted
     const filter = octopusCenter.filters.MessageEmit();
     const events = await octopusCenter.queryFilter(filter);
     expect(events.length).to.equal(1);
+    console.log("Timelock : fine");
   });
 });

@@ -1,10 +1,10 @@
 pragma solidity ^0.8.9;
-import "./OctopusCenter.sol";
+import "../OctopusCenter.sol";
 import "hardhat/console.sol";
 
 
 //Timelock encryption
-contract OctopusContractExample {
+contract TimeLockEncryption {
 
     bytes32 immutable signatureTargetMessage;
     uint256 immutable targetBlockNum;
